@@ -1,0 +1,15 @@
+version: "3"
+services:
+  chatgpt:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    tty: true
+    environment:
+      OPENAI_API_KEY: "${OPENAI_API_KEY}"
+      VOICEVOX_API_HOST: "${VOICEVOX_API_HOST}"
+  voicevox:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    build: .
+    ports:
+      - "50021:50021"

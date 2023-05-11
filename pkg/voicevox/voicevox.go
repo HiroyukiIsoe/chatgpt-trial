@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func Speak(text string, outPath string) {
+func Speak(text string, outPath string) error {
 	audioQuery := getAudioQuery(text)
 
 	b := synthesis(audioQuery)
@@ -22,8 +22,9 @@ func Speak(text string, outPath string) {
 	}
 
 	if err := ioutil.WriteFile(out, b, 0644); err != nil {
-		panic(err)
+		return err
 	}
+	return nil
 }
 
 func getAudioQuery(text string) AudioQueryResponse {

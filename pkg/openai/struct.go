@@ -8,6 +8,15 @@ type Message struct {
 type OpenaiChatRequest struct {
 	Model    string    `json:"model"`
 	Messages []Message `json:"messages"`
+	Stream   bool      `json:"stream"`
+}
+
+type SseResponse struct {
+	ID      string   `json:"id"`
+	Object  string   `json:"object"`
+	Created int64    `json:"created"`
+	Model   string   `json:"model"`
+	Choices []Choice `json:"choices"`
 }
 
 type OpenaiChatResponse struct {
@@ -22,6 +31,9 @@ type Choice struct {
 	Index        int     `json:"index"`
 	Message      Message `json:"message"`
 	FinishReason string  `json:"finish_reason"`
+	Delta        struct {
+		Content string `json:"content"`
+	} `json:"delta"`
 }
 
 type Usage struct {
